@@ -49,13 +49,13 @@ jobs:
       - name: ask for the next run
         if: steps.pass.outputs.verdict == 'more'
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.AGENT_TOKEN }}
         run: gh workflow run agent --ref "${GITHUB_REF_NAME}"
 
       - name: commit the counter
         if: always()
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.AGENT_TOKEN }}
         run: |
           git config user.name 'agent'
           git config user.email 'agent@users.noreply.github.com'
